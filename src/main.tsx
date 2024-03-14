@@ -8,3 +8,40 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <App />
   </React.StrictMode>,
 )
+
+async function post(url: string, body: any): Promise<any> {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (res.status !== 200) {
+    throw await res.json();
+  }
+
+  return res.json();
+}
+
+async function get(url: string): Promise<any> {
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (res.status !== 200) {
+    throw await res.json();
+  }
+
+  return res.json();
+}
+
+post("/api/weather", { location: "Suzhou", date: 0 }).then((r) =>
+    console.log(r)
+);
