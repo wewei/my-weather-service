@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
+const RegisterUrl = "http://localhost:8080";
+const ServiceUrl = "http://localhost:8081";
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />
@@ -42,6 +45,41 @@ async function get(url: string): Promise<any> {
   return res.json();
 }
 
-post("/api/weather", { location: "Suzhou", date: 0 }).then((r) =>
+post("/api/weather", { location: "Suzhou" }).then((r) =>
     console.log(r)
 );
+
+const functions = [
+  {
+    name: "queryWeather",
+    target: `${ServiceUrl}/api/weather`,
+    description: "query the weather of a given city",
+    parameters: {
+      location: {
+        description: "the name of the city",
+        type: "string",
+      },
+    },
+    require: ['location'],
+  },
+  {
+    name: "hotNews",
+    target: `${ServiceUrl}/api/news`,
+    description: "Get the today's hot news",
+    parameters: {},
+    require: []
+  },
+];
+
+const embedIframe: HTMLIFrameElement = document.createElement("iframe");
+embedIframe.src = `${RegisterUrl}/embed/`;
+embedIframe.style.display = "none";
+document.body.appendChild(embedIframe);
+// document.getElementById("embed") as HTMLIFrameElement | null;
+
+if (embedIframe) {
+    setTimeout(() => {
+        console.log("post message!");
+        embedIframe.contentWindow?.postMessage({ func: "register", functions }, RegisterUrl);
+    }, 1000);
+}
