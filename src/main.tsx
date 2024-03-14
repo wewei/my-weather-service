@@ -4,9 +4,10 @@ import App from './App.tsx'
 import './index.css'
 
 // const RegisterUrl = "http://localhost:8080";
+const RegisterUrl = "https://my-simple-copilot.azurewebsites.net";
+
 // const ServiceUrl = "http://localhost:8081";
-const RegisterUrl = "https://my-simple-copilot.azurewebsites.net/";
-const ServiceUrl = "https://my-weather-service.azurewebsites.net/"
+const ServiceUrl = "https://my-weather-service.azurewebsites.net"
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
