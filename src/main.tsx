@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// const RegisterUrl = "http://localhost:8080";
-const RegisterUrl = "https://my-simple-copilot.azurewebsites.net";
+const RegisterUrl = "http://localhost:8080";
+// const RegisterUrl = "https://my-simple-copilot.azurewebsites.net";
 
-// const ServiceUrl = "http://localhost:8081";
-const ServiceUrl = "https://my-weather-service.azurewebsites.net"
+const ServiceUrl = "http://localhost:8081";
+// const ServiceUrl = "https://my-weather-service.azurewebsites.net"
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -64,13 +64,16 @@ const functions = [
       },
     },
     require: ['location'],
+    interpret: "Translate the weather result to human language. For each item in 'results', 'location' means the place of the weather inquery, forcs on the 'name' and 'path', the 'daily' is a per day forecast, underwhich, the 'date' is the forecast date, the 'text_day' is text description of the weather, the 'high' and 'low' are the highest and lowest temperature, 'rainfall' is the chance of rainfall, 'wind_direction', 'wind_speed' and 'wind_scale' just mean what the name indicates about the wind, 'humidity' is just the humidity."
   },
   {
     name: "hotNews",
     target: `${ServiceUrl}/api/news`,
     description: "Get the today's hot news",
     parameters: {},
-    require: []
+    require: [],
+    interpret: "For items under 'data.items', translate them into news link list in markdown format, where 'title' and 'url' descibes the links, the 'thumbnail' are the images",
+    // interpret: "Translate the data into a news list in markdown format."
   },
 ];
 
