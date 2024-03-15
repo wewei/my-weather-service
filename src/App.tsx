@@ -3,8 +3,8 @@ import "./App.css";
 // const RegisterUrl = "http://localhost:8080";
 const RegisterUrl = "https://my-simple-copilot.azurewebsites.net";
 
-const ServiceUrl = "http://localhost:8081";
-// const ServiceUrl = "https://my-weather-service.azurewebsites.net"
+// const ServiceUrl = "http://localhost:8081";
+const ServiceUrl = "https://my-weather-service.azurewebsites.net"
 
 const functions = [
   {
@@ -55,12 +55,12 @@ function App() {
 	return (
 		<div className="App">
 			<div>
-				This site will register 2 methods to copilot
-				<ul>
+				<h2>This site will register 2 methods to copilot</h2>
+				<ul style={{ textAlign: "left" }}>
 					<li>Query the weather of a city</li>
 					<li>Get today's hot news</li>
 				</ul>
-				<div><button onClick={() => inject(false)}>Register</button></div>
+				<div style={{ textAlign: "left" }}><button onClick={() => inject(false)}>Register</button></div>
 			</div>
 		</div>
 	);
